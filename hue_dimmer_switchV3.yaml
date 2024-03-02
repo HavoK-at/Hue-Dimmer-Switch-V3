@@ -122,8 +122,7 @@ action:
           - choose:
               - conditions: "{{ is_turned_on }}"
                 sequence: !input "button_on_single_already_on"
-            default:
-              - sequence: !input "button_on_single"
+            default: !input "button_on_single"
       - conditions: "{{ command == 'on_double_press' }}"
         sequence: !input "button_on_double"
       - conditions: "{{ command == 'on_triple_press' }}"
