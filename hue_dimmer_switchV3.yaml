@@ -54,7 +54,13 @@ blueprint:
           step: 1.0
     button_on_single:
       name: On button - Single press
-      description: Action to run when double pressing the on button
+      description: Action to run when single pressing the on button
+      default: []
+      selector:
+        action: {}
+    button_on_single_already_on:
+      name: On button - Single Press but light is already on
+      description: Action to run when single pressing the on button but the light is already on
       default: []
       selector:
         action: {}
@@ -112,7 +118,12 @@ action:
       is_turned_on: "{{ states(light) == 'on' }}"
   - choose:
       - conditions: "{{ command == 'on_press' }}"
-        sequence: !input "button_on_single"
+        sequence:
+          - choose:
+              - conditions: "{{ is_turned_on }}"
+                sequence: !input "button_on_single_already_on"
+            default:
+              sequence: !input "button_on_single"
       - conditions: "{{ command == 'on_double_press' }}"
         sequence: !input "button_on_double"
       - conditions: "{{ command == 'on_triple_press' }}"
