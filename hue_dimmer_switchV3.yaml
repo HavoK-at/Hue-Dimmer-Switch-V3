@@ -13,7 +13,7 @@ blueprint:
     The naming of the command attribute in the zha_event was changed back then. \n"
   domain: automation
   input:
-    zha_device:
+    remote:
       name: Philips Hue Dimmer Switch (RWL020 / RWL021 / RWL022)
       description: Should work with all three remotes
       selector:
