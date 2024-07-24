@@ -123,12 +123,10 @@ action:
       cur_brightness: "{{ state_attr(light, 'brightness') | int(0) }}"
       is_turned_on: "{{ states(light) == 'on' }}"
   - choose:
+      - conditions: "{{ command == 'on_press' and is_turned_on}}"
+        sequence: !input "button_on_single_already_on"
       - conditions: "{{ command == 'on_press' }}"
-        sequence:
-          - choose:
-              - conditions: "{{ is_turned_on }}"
-                sequence: !input "button_on_single_already_on"
-            default: !input "button_on_single"
+        sequence: !input "button_on_single"
       - conditions: "{{ command == 'on_double_press' }}"
         sequence: !input "button_on_double"
       - conditions: "{{ command == 'on_triple_press' }}"
