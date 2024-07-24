@@ -112,7 +112,7 @@ max_exceeded: silent
 variables:
   light: !input "light"
   min_brightness: !input "min_brightness"
-  remotes: !input remotes
+  remotes: !input remote
 trigger:
   - platform: event
     event_type: zha_event
