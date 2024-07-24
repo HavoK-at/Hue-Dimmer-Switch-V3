@@ -161,14 +161,14 @@ action:
               entity_id: !input "light"
               brightness_step: 50
               transition: 1
-      - conditions: "{{ (command == 'down_press') && (cur_brightness - 25) >= min_brightness }}"
+      - conditions: "{{ (command == 'down_press') and (cur_brightness - 25) >= min_brightness }}"
         sequence:
           - service: light.turn_on
             data:
               entity_id: !input "light"
               transition: 1
               brightness_step: -25
-      - conditions: "{{ command == 'down_hold' && (cur_brightness - 50) >= min_brightness }}"
+      - conditions: "{{ command == 'down_hold' and (cur_brightness - 50) >= min_brightness }}"
         sequence:
           - service: light.turn_on
             data:
