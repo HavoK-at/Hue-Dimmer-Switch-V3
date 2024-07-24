@@ -18,6 +18,7 @@ blueprint:
       description: Should work with all three remotes
       selector:
         device:
+          multiple: true
           filter:
             - integration: zha
               manufacturer: Philips
