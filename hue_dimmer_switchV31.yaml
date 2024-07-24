@@ -112,12 +112,15 @@ max_exceeded: silent
 variables:
   light: !input "light"
   min_brightness: !input "min_brightness"
+  remotes: !input remotes
 trigger:
   - platform: event
     event_type: zha_event
-    event_data:
-      device_id: !input "remote"
-      cluster_id: 64512
+# trigger does only support single devices for setting the device_id
+# thus, we need to set it within an condition
+condition:
+  - condition: template
+    value_template: "{{ trigger.event.data.device_id in remotes }}"
 action:
   - variables:
       command: "{{ trigger.event.data.command }}"
